@@ -1,0 +1,90 @@
+/* navbar side nav */
+.side-nav-content{
+    position: absolute;
+    top: 52px;
+    left: 0rem;
+    width: 250px;
+    height: 630px;
+}
+
+/* navbar ul */
+.side-nav-content .nav-list{
+    list-style: none;
+    height: 100%;
+    padding: 0%;
+    margin-bottom: auto;
+}
+
+/* navbar li */
+.side-nav-content .nav-list .nav-list-item{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.side-nav-content .nav-list .nav-list-item:hover{
+    background-color: #ffffff6c;
+    border-radius: 10px;
+}
+
+/* navbar li icon */
+.side-nav-content .nav-list .nav-list-item fa-icon{
+    font-size: 20px;
+    height: 25px;
+    color: #ffffff;
+    width: 25px;
+    margin-right: 15px;
+    margin-left: 10px;
+    text-align: center;
+    line-height: 25px;
+}
+
+/* navbar li span */
+.side-nav-content .nav-list .nav-list-item span{
+    width: 170px;
+    text-transform: capitalize;
+}
+
+.side-nav-content .nav-list .nav-list-item span a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+/* navbar sidenav show hide content */
+.hide{
+    display: none;
+    /* overflow-x: hidden;
+    white-space: nowrap; */
+    transition: width 250ms ease-in;
+}
+
+.show{
+    transition: width 250ms ease-in;
+}
+
+
+/* main */
+main{
+    margin-top: 20px;
+}
+
+.nav-text{
+    margin: 10px;
+    font-size: 15px;
+}
+
+.nav-cart-button{
+    margin-right: 5px; 
+    font-size: 20px;
+}
+
+/* footer */
+footer {
+    margin-top: 15%;
+}
+
+/* toastr */
+::ng-deep .toast-top-center{
+    padding: 5px;
+    margin: auto;
+}

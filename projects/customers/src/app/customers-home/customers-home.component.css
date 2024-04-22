@@ -1,0 +1,29 @@
+/* card */
+.card{
+    background-image: url('../../assets/welcome_image/welcomemenu.jpg');
+    padding-top: 160px;
+    margin: auto;
+    height: 450px;
+    width: 450px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* heading */
+h1{
+    font-size: 27px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+h4{
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/* button */
+.btn-card .btn{
+    border-radius: 22px;
+}
+

@@ -1,0 +1,42 @@
+/* container */
+.container-fluid{
+    padding-top: 5rem;
+    margin: auto;
+}
+
+/* list content */
+.list-group .list-group-item span{
+    padding: 10px;
+    margin: 10px;
+}
+
+/* pagination content */
+.pagination-content{
+    margin-top: 2rem;
+}
+
+/* table */
+td span input{
+    width: 15%;
+}
+
+td span input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
+    display: none;
+}
+
+/* card */
+.card{
+    background-image: url('../../assets/fooditems_images/foodservent.jpg');
+    padding-top: 25%;
+    margin: auto;
+    height: 400px;
+    width: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.h3{
+    font-weight: bold;
+    font-size: 20px;
+}

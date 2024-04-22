@@ -1,0 +1,37 @@
+/* card */
+.card {
+    height: 650px;
+    width: 80%;
+    bottom: 70px;
+    padding: 25px;
+    margin: auto;
+}
+
+/* btn-times */
+.btn-times .btn{
+    border-radius: 22px;
+    float: right;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+/* form-group */
+.form-group{
+    position: relative;
+}
+
+.form-group .eye-icon{
+    position: absolute;
+    bottom: 2px;
+    top: 2px;
+    right: 2px;
+    padding: 5px;
+    margin: auto;
+}
+
+/* form button */
+.btn{
+    border-radius: 25px;
+    font-size: 15px;
+}
+

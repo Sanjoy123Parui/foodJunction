@@ -1,0 +1,117 @@
+<!-- start div container-fluid -->
+<div class="container-fluid" *ngIf="cartData">
+
+    <!-- start section table-content -->
+    <section class="table-responsive">
+
+        <!-- start table -->
+        <table class="table table-hover">
+            
+            <!-- start thead -->
+            <thead class="table-header text-light bg-warning">
+                <tr>
+                    <th>Options</th>
+                    <th>Images</th>
+                    <th>Foods</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <!-- end thead -->
+
+            <!-- start tbody -->
+            <tbody class="table-header bg-light">
+            <tr *ngFor="let cartItems of cartList.items">
+                    <td>
+                        <input type="radio" (change)="onSelectCart(cartItems)" name="r">
+                    </td>
+                    <td>
+                        <img [src]="cartItems.food_id.food_image" width="100px" height="100px" alt="No Image">
+                    </td>
+                    <td>{{cartItems.food_id.food_name}}</td>
+                    <td>{{cartItems.food_id.food_desc}}</td>
+                    <td><span class="badge badge-pills badge-success text-center">{{cartItems.orderqty}}</span></td>
+                    <td>
+                        <span class="badge badge-pills badge-primary">{{cartItems.food_id.food_price}}</span>
+                    </td>
+                    <td>
+                        <button type="button" [disabled]="selectedCartItems.length==0"  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCartremove">
+                            <fa-icon [icon]="trash"></fa-icon>
+                        </button>    
+                    </td>
+            </tr>
+            </tbody>
+            <!-- end tbody -->
+        </table>
+        <!-- end table -->
+
+    </section>
+    <!-- end section -->
+
+    <!-- start section card -->
+    <section class="footer-content">
+        <!-- start ul -->
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="text-success" style="font-weight: 600;">TotalPrice:{{totalPrice.totalprice | currency:'INR'}}</span>
+                <span class="btn-order-placed float-right">
+                    <button type="button" (click)="onPlaceorder()" class="btn btn-sm btn-danger">Order now</button>
+                </span>
+            </li>
+        </ul>
+        <!-- end ul -->
+    </section>
+    <!-- end section -->
+
+    <!-- start modal -->
+    <div class="modal fade" id="exampleModalCartremove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cart Remove</h5>
+            <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to remove cart items?</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="onRemovecart()" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- end modal -->
+
+</div>
+<!-- end div -->
+
+<!-- start div container -->
+<div class="container" *ngIf="!cartData">
+            
+    <!-- start div flex -->
+    <div class="d-flex justify-content-center  py-4 me-3">
+
+    <!-- start div card -->
+    <div class="card text-center">
+
+        <h4>Please add to cart food items</h4>
+        
+        <!-- start div btn-card -->
+        <div class="btn-card my-2 my-sm-0">
+            <button type="button" (click)="onFoodS()" style="margin-right: 15%;" class="btn btn-primary">Back</button>
+        </div>
+        <!-- end div -->
+
+    </div>
+    <!-- end div -->
+
+    </div>
+    <!-- end div -->
+
+</div>
+<!-- end div -->

@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/* body */
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    background-image: url('./assets/backround_img/foodback.jpg');
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}

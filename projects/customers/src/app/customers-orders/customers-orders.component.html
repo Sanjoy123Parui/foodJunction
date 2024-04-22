@@ -1,0 +1,69 @@
+<!-- start div container -->
+<div class="container-fluid" >
+
+    <div *ngIf="orderData.length!=0">
+
+        <!-- start section list-content -->
+        <section *ngFor="let orderInfo of orderData" class="list-content bg-light">
+
+            <!-- start div header content -->
+            <div class="header-content">
+                <input type="radio" (change)="onSelectOrder(orderInfo)" name="r">
+                <span class="header-content-date text-success" style="font-size: 20px; font-weight: 600;">{{orderInfo.order_date}}</span>
+                <span class="header-content-time text-success float-right" style="font-size: 20px; font-weight: 600;">
+                    {{orderInfo.order_time}}
+                </span>
+                <div class="content-status">
+                    <p>{{orderInfo.order_status}}</p>
+                </div>
+            </div>
+            <!-- end div -->
+
+            <!-- start list -->
+            <ul class="list-group">
+                <li *ngFor="let orderItems of orderInfo.items" class="list-group-item">
+                <span>
+                    <img [src]="orderItems.food_id.food_image" height="100px" width="100px" alt="No Image">
+                </span>
+                <span>{{orderItems.food_id.food_name}}</span>
+                <span class="badge badge-pills badge-primary">{{orderItems.food_id.food_price|currency:'INR'}}</span>
+                <span class="badge badge-pills badge-success">{{orderItems.orderqty}}</span>
+                </li>
+            </ul>
+            <!-- end list -->
+
+            <!-- start div footer -->
+            <div class="footer-content">
+                <span class="text-success">{{orderInfo.totalprice|currency:'INR'}}</span>
+                <span class="btn-cancel">
+                    <button type="button" style="margin-top: 5px;" [disabled]="selectedOrderdata.length==0"  (click)="onCancelorder()" class="btn btn-danger float-right">
+                        Cancel
+                    </button>
+                </span>
+            </div>
+            <!-- end div -->
+
+        </section>
+        <!-- end section -->
+
+    </div>
+
+    <div *ngIf="orderData.length==0">
+        <!-- start div flex -->
+        <div class="d-flex justify-content-center  py-4 me-3">
+
+            <!-- start div card -->
+            <div class="card text-center">
+                <h4>No orders has been Placed !</h4>
+                <div class="btn-content">
+                    <button type="button" style="margin-top: 30%;" (click)="onBack()" class="btn  btn-primary">Back</button>
+                </div>
+            </div>
+            <!-- end card -->
+
+        </div>
+        <!-- end div -->
+    </div>
+
+</div>
+<!-- end div -->

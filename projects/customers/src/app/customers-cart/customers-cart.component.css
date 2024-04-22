@@ -1,0 +1,17 @@
+/* card */
+.card{
+    background-image: url('../../assets/carts_image/addtocart.jpg');
+    height: 500px;
+    width: 500px;
+    padding-top: 373px;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* heading */
+h4{
+    margin-right: 5px; 
+}
+

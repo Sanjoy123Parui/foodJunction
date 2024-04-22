@@ -1,0 +1,217 @@
+<!-- start div container fluid -->
+<div class="container-fluid pt-3 mt-3">
+
+    <!--  search content -->
+    <div class="form-group">
+        <input type="text" [(ngModel)]="searchfoodData" class="form-control" placeholder="Search foods...">
+    </div>
+
+    <!-- add button -->
+    <div class="btr-add float-right">
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalAdd">
+            <fa-icon [icon]="plus"></fa-icon>
+        </button>
+    </div>
+
+    <!-- start div from table responsive  -->
+    <div class="table-responsive">
+
+        <!-- start table -->
+        <table class="table table-hover">
+
+            <!-- start thead -->
+            <thead class="thead text-white">
+                <tr>
+                    <th>Options</th>
+                    <th>Images</th>
+                    <th>Foods</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <!-- end thead -->
+
+            <!-- start tbody -->
+            <tbody class="tbody bg-light">
+                <tr *ngFor="let foodItem of foodList | adminFoodsFilter: searchfoodData | paginate:{
+                    itemsPerPage : 3,
+                    currentPage :  startLinkIndex,
+                    totalItems  :  totalRows
+                }">
+                    <td class="pt-3">
+                        <input type="radio" (change)="onselectItems(foodItem)" name="r" class="ml-3">
+                    </td>
+
+                    <td>
+                        <img [src]="foodItem.food_image" width="100px" height="100px">
+                        
+                        <input hidden type="file" #foodImage (change)="onChangeimage($event)">
+
+                        <button type="button" [disabled]="selectedfoodItems.length == 0" 
+                        style="font-size: 7px; position: absolute; display: block; bottom: 10px; right: 2px; border-radius: 20px;"  
+                        (click)="foodImage.click()" class="btn btn-sm btn-primary">
+                            <fa-icon [icon]="upload"></fa-icon>
+                        </button>
+                    </td>
+
+                    <td>{{foodItem.food_name}}</td>
+
+                    <td>{{foodItem.food_desc}}</td>
+
+                    <td>
+                        <span class="badge badge-pills badge-danger">{{foodItem.food_price | currency: 'INR'}}</span>
+                    </td>
+
+                    <td>
+                        <ul class="list-inline m-0">
+                            <li class="list-inline-item">
+                                <button class="btn btn-sm btn-success" type="button" data-toggle="modal" 
+                                [disabled]="selectedfoodItems.length == 0" data-target="#exampleModalEdit">
+                                    <fa-icon [icon]="edit"></fa-icon>
+                                </button>
+                            </li>
+                            <li class="list-inline-item">
+                                <button class="btn btn-sm btn-danger" type="button" data-toggle="modal" 
+                                [disabled]="selectedfoodItems.length == 0" data-target="#exampleModalDelete">
+                                    <fa-icon [icon]="trash"></fa-icon>
+                                </button>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+            <!-- end tbody -->
+
+        </table>
+        <!-- end table -->
+
+    </div>
+    <!-- end div -->
+
+    <!-- pagination content -->
+    <div class="pagination-content bg-light">
+        <pagination-controls (pageChange)="startLinkIndex=$event"></pagination-controls>
+    </div>
+
+    <!-- start div add foods modal form -->
+    <div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Add Foods Items</h5>
+                    <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        <fa-icon [icon]="times"></fa-icon>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- start add items form -->
+                    <form [formGroup]="foodItems">
+                        <div class="form-group">
+                            <input type="text" formControlName="food_name" [class.is-invalid]="food_name.touched && food_name.invalid" 
+                             class="form-control" placeholder="Foods">
+                             <section *ngIf="food_name.touched && food_name.invalid">
+                                <small class="text-danger" *ngIf="food_name.errors?.['required']">Food name is required</small>
+                             </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" formControlName="avatar" [class.is-invalid]="avatar.touched && avatar.invalid" 
+                            (change)="onSelect($event)" class="form-control">
+                            <section *ngIf="avatar.touched && avatar.invalid">
+                                <small class="text-danger" *ngIf="avatar.errors?.['required']">File is required</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea cols="10" rows="5" [class.is-invalid]="food_desc.touched && food_desc.invalid" class="form-control" formControlName="food_desc" placeholder="Description">
+                            </textarea>
+                            <section *ngIf="food_desc.touched && food_desc.invalid">
+                                <small class="text-danger" *ngIf="food_desc.errors?.['required']">Food description is required</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" [class.is-invalid]="food_price.touched && food_desc.invalid" formControlName="food_price" class="form-control" placeholder="Price">
+                            <section *ngIf="food_price.touched && food_price.invalid">
+                                <small class="text-danger" *ngIf="food_price.errors?.['required']">Food price is required</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group modal-footer">
+                            <button type="button" [disabled]="foodItems.invalid" class="btn btn-danger" data-dismiss="modal">
+                                Cancel
+                            </button>
+                            <button type="button" [disabled]="foodItems.invalid" (click)="onAddfoods()" class="btn btn-success" data-dismiss="modal">Add</button>
+                        </div>
+                    </form>
+                    <!-- end form -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end div -->
+
+
+    <!-- start div update foodItems modal popup form -->
+    <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Change Foods Items</h5>
+              <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                <fa-icon [icon]="times"></fa-icon>
+              </button>
+            </div>
+            <div class="modal-body">
+                <!-- start form -->
+                <form [formGroup]="foodItems">
+                    <div class="form-group">
+                        <input type="text" formControlName="food_name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea cols="10" rows="5" formControlName="food_desc" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" formControlName="food_price" class="form-control">
+                    </div>
+
+                    <div class="form-group modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" (click)="onEditfoods()" class="btn btn-success" data-dismiss="modal">Save</button>
+                    </div>
+                </form>
+                <!-- end form -->
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- end div -->
+
+    <!-- start div delete food items confirmation with modal popup -->
+    <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Food Items Remove</h5>
+              <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                <fa-icon [icon]="times"></fa-icon>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Are you sure the delete a food item?</strong></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-success" (click)="onDeletfoods()" data-dismiss="modal">Confirm</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- end div -->
+
+</div>
+<!-- end div -->

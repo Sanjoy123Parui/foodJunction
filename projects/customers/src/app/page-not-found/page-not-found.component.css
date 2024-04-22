@@ -1,0 +1,17 @@
+/* card */
+.card{
+    background-image: url('../../assets/error_image/pagenotfound.jpg');
+    height: 400px;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* btn */
+.btn-card-back .btn{
+    position: absolute;
+    top: 320px;
+    left: 450px;
+}

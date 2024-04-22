@@ -1,0 +1,145 @@
+<!-- ng-container content -->
+<ng-container *ngIf="foodData != '' then allFoods else emptyFoods"></ng-container>
+
+<!-- start first ngtemplate -->
+<ng-template #allFoods>
+
+    <!-- start div container fluid -->
+    <div class="container-fluid">
+
+        <!-- start div search foods -->
+        <div class="form-group">
+            <input type="text" [(ngModel)]="searchFoods" class="form-control" placeholder="Search Food Items...">
+        </div>
+        <!-- end div -->
+
+        <!-- start div row -->
+        <div class="row">   
+
+            <!-- start first section column -->
+            <section class="col-lg-6">
+
+                <!-- start list items content -->
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let foodItem of foodList | foodsFilter: searchFoods | paginate:{itemsPerPage:4, currentPage:startLinkIndex, totalItems:totalRows}">
+
+                        <span>
+                            <input type="radio" (change)="onSelect(foodItem)"  name="r">
+                        </span>
+
+                        <span>
+                            <img [src]="foodItem.food_image" width="100px" height="100px" alt="No Image">
+                        </span>
+                       
+                        <span>{{foodItem.food_name}}</span>
+                        <span class="badge badge-pills badge-danger float-right">{{foodItem.food_price | currency:'INR'}}</span>
+                    </li>
+                </ul>
+                <!-- end list items content -->
+
+            </section>
+            <!-- end section -->
+
+            <!-- start second section column -->
+            <section class="col-lg-6">
+
+                <!-- start div table content -->
+                <div *ngIf="selectedFoods.length!=0" class="table-responsive">
+
+                    <!-- start table -->
+                    <table class="table table-hover bg-light">
+                        <tr>
+                            <th>Image:</th>
+                            <td>
+                                <img [src]="selectedFoods.food_image" width="100px" height="100px" alt="No Image">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Food:</th>
+                            <td>{{selectedFoods.food_name}}</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Description:</th>
+                            <td>{{selectedFoods.food_desc}}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Price:</th>
+                            <td><span class="badge badge-pills badge-primary">{{selectedFoods.food_price | currency:'INR'}}</span></td>
+                        </tr>
+
+
+                        <tr>
+                            <th>Quantity:</th>
+                            <td>
+                                <span>
+                                    <button type="button" (click)="onCounter(false)" class="btn btn-sm btn-primary">
+                                        <fa-icon [icon]="minus"></fa-icon>
+                                    </button>
+                                </span>
+                                <span>
+                                    <input type="number"  [(ngModel)]="orderqty" class="quantity-field border-0 text-center">
+                                </span>
+                                <span>
+                                    <button type="button" (click)="onCounter(true)" class="btn btn-sm btn-primary">
+                                        <fa-icon [icon]="plus"></fa-icon>
+                                    </button>
+                                </span>    
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <td>
+                                <button type="button" (click)="onAddtocart()" class="btn btn-sm btn-danger float-right">Addtocart</button>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                    <!-- end table -->
+
+                </div>
+                <!-- end div -->
+
+            </section>
+            <!-- end section -->
+
+        </div>
+        <!-- end div -->
+
+        <!-- start div pagination -->
+        <div class="pagination-content bg-light">
+            <pagination-controls (pageChange)="startLinkIndex=$event"></pagination-controls>
+        </div>
+        <!-- end div -->
+
+    </div>
+    <!-- end div -->
+
+</ng-template>
+<!-- end ng-template -->
+
+<!-- start second ng-template -->
+<ng-template #emptyFoods>
+    
+    <!-- start div container -->
+    <div class="container">
+
+        <!-- start div flex -->
+        <div class="d-flex justify-content-center  py-4 me-3">
+
+            <!-- start div card -->
+            <div class="card text-center">
+                <h3>Sorry no such have foods Items ?</h3>
+            </div>
+
+        </div>
+        <!-- end div -->
+       
+    </div>
+    <!-- end div -->
+
+</ng-template>
+<!-- end ng-template -->

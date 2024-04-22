@@ -1,0 +1,12 @@
+/* container */
+.container{
+    padding: 45px;
+    margin: auto;
+}
+
+/* content */
+.content{
+    background-color: #ffffff;
+    padding: 45px;
+    margin: auto;
+}

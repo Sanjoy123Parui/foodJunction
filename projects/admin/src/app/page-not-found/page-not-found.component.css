@@ -1,0 +1,12 @@
+/* card */
+.card{
+    background-image: url('../../assets/error/pagenotfound.jpg');
+    height: 450px;
+    width: 450px;
+    padding-top: 160px;
+    margin: auto;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+}
+

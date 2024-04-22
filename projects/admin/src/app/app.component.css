@@ -1,0 +1,18 @@
+/* text */
+.nav-text{
+    margin: 15px;
+    font-size: 20px;
+}
+
+
+
+/* footer */
+footer {
+    margin-top: 15%;
+}
+
+/* toastr */
+::ng-deep .toast-top-center{
+    padding: 5px;
+    margin: auto;
+}

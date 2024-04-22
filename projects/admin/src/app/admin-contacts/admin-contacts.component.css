@@ -1,0 +1,12 @@
+/* container */
+.container{
+    padding: 50px;
+    margin: auto;
+}
+
+/* section */
+.contacts-content{
+    background-color: #ffffff;
+    padding: 50px;
+    margin: auto;
+}

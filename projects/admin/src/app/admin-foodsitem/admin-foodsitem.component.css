@@ -1,0 +1,39 @@
+/* add btn */
+.btr-add{
+    padding: 2px;
+    margin: 2px;
+}
+
+.btr-add .btn{
+    font-size: 22px;
+}
+
+/* table */
+.thead{
+    background-color: #800080;
+}
+
+/* card  */
+.card{
+    background-image: url('../../assets/foodsItem/foodservent.jpg');
+    height: 500px;
+    width: 100%;
+    padding-top: 350px;
+    margin: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* modal popup */
+.modal-content{
+    padding: 10px;
+    margin: auto;
+    width: 100%;
+}
+
+/* table */
+
+td{
+    position: relative;
+}

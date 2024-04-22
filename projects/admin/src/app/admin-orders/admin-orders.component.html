@@ -1,0 +1,137 @@
+<!-- start div container-fluid -->
+<div class="container-fluid">
+    <!-- start first div -->
+    <div *ngIf="orderItems" class="success">
+
+        <!-- stat div search foods -->
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="searchCustomers" placeholder="Search foods...">
+        </div>
+
+        <!-- start div table -->
+        <div class="table-responsive">
+            <!-- start table -->
+            <table class="table table-hover">
+                <!-- start thead -->
+                <thead class="thead bg-warning text-light">
+                    <tr>
+                        <th>Option</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Total Price</th>
+                        <th>Date&Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <!-- end thead -->
+
+                <!-- start tbody -->
+                <tbody class="tbody bg-light">
+                    <tr *ngFor="let data of orderData | adminOrdersFilter:searchCustomers | paginate:{
+                        itemsPerPage : 3,
+                        currentPage :  startLinkIndex,
+                        totalItems  :  totalRows
+                    }">
+                        <td>
+                            <input type="radio" name="r" (change)="onSelect(data)" data-toggle="collapse"
+                                data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        </td>
+                        <td>{{data.user_id.user_name}}</td>
+                        <td>
+                            <a href="mailto:{{data.user_id.user_email}}">{{data.user_id.user_email}}</a>
+                        </td>
+                        <td>
+                            <a href="tel:{{data.user_id.user_phone}}">{{data.user_id.user_phone}}</a>
+                        </td>
+                        <td>
+                            <span class="badge badge-pills badge-danger">{{data.totalprice|currency:'INR'}}</span>
+                        </td>
+                        <td>
+                            <span>{{data.order_date}}</span><br>
+                            <span>{{data.order_time}}</span>
+                        </td>
+                        <td>{{data.order_status}}</td>
+                        <td>
+                            <ul class="list-inline m-0">
+
+                                <li class="list-inline-item">
+                                    <button class="btn btn-sm btn-danger" type="button" data-toggle="modal"
+                                    [disabled]="selectedOrders.length==0" data-target="#exampleModalDelete">
+                                        <fa-icon [icon]="trashIcon"></fa-icon>
+                                    </button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- end tbody -->
+            </table>
+            <!-- end table -->
+
+            <!-- pagination content -->
+            <div class="pagination-content bg-light">
+                <pagination-controls (pageChange)="startLinkIndex=$event"></pagination-controls>
+            </div>
+
+            <!-- start div delete food items confirmation with modal popup -->
+            <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Orders Remove</h5>
+                            <button type="button" class="close btn btn-danger" data-dismiss="modal" aria-label="Close">
+                                <fa-icon [icon]="timesIcon"></fa-icon>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Are you sure the delete a orders?</strong></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-danger" (click)="onDeleteorders()"
+                                data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end div -->
+
+            <!-- start div -->
+            <div class="collapse" id="collapseExample">
+                <!-- start div card -->
+                <div class="card">
+                    <!-- start ul -->
+                    <ul class="list-group">
+                        <!-- start li -->
+                        <li *ngFor="let item of selectedOrders.items" class="list-group-item">
+                            <span>
+                                <img [src]="item.food_id.food_image" height="50px" width="50px" alt="No Image">
+                            </span>
+                            <span>{{item.food_id.food_name}}</span>
+                            <span>{{item.food_id.food_desc}}</span>
+                            <span
+                                class="badge badge-pills badge-danger">{{item.food_id.food_price|currency:'INR'}}</span>
+                            <span class="badge badge-pills badge-primary">{{item.orderqty}}</span>
+                        </li>
+                        <!-- end li -->
+                    </ul>
+                    <!-- end ul -->
+                </div>
+                <!-- end div -->
+            </div>
+            <!-- end div -->
+        </div>
+        <!-- end div -->
+
+        <div *ngIf="!orderItems" class="error d-flex justify-content-center py-4 me-3">
+            <div class="card text-center">
+                <div class="btn-card my-2 my-sm-0">
+                    <button class="btn btn-primary my-2 my-sm-0" (click)="onDashboard()" type="button">Go Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end div -->

@@ -1,0 +1,155 @@
+<!-- start div container -->
+<div class="container">
+
+    <!-- start div card -->
+    <div class="card  border-0">
+
+        <!-- card close button -->
+        <div class="btn-card-close">
+            <button type="button" class="btn btn-sm btn-danger" (click)="onCloseform()">
+                <fa-icon [icon]="times"></fa-icon>
+            </button>
+        </div>
+        
+        <!-- start div card header -->
+        <div class="card-header border-bottom-0 bg-transparent">
+            <ul class="nav nav-tabs justify-content-center pt-4" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">LogIn</a>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link" id="pills-register-tab" data-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
+              </li>
+            </ul>
+        </div>
+        <!-- end div -->
+
+        <!-- start div card body -->
+        <div class="card-body pb-4">
+
+            <!-- start div tab content -->
+            <div class="tab-content" id="pills-tabContent">
+
+                <!-- start div login form content -->
+                <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab">
+
+                    <h3 class=" text-center text-primary">Login</h3>
+                    
+                    <!-- start form -->
+                    <form #userSigninform="ngForm">
+                        <div class="form-group">
+                            <input type="email" #user_email="ngModel" name="user_email" [(ngModel)]="userForm.user_email"
+                            [class.is-invalid]="user_email.touched && user_email.invalid" class="form-control" 
+                            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email" required>
+                            <section *ngIf="user_email.touched && user_email.invalid">
+                                <small class="text-danger" *ngIf="user_email.errors?.['required']">Email is required</small>
+                                <small class="text-danger" *ngIf="user_email.errors?.['pattern']">Email is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="{{ showhidePassword ? 'password' : 'text' }}" #user_pass="ngModel" name="user_pass"
+                            [(ngModel)]="userForm.user_pass" [class.is-invalid]="user_pass.touched && user_pass.invalid" 
+                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$" class="form-control" 
+                            placeholder="Password" required>
+                            <span  class="eye-icon">
+                                <fa-icon [icon]="showhidePassword ? eyeSlash : eye" (click)="togglePasswordVisibility()"></fa-icon>
+                            </span>
+                            <section *ngIf="user_pass.touched && user_pass.invalid">
+                                <small class="text-danger" *ngIf="user_pass.errors?.['required']">Password is required</small>
+                                <small class="text-danger" *ngIf="user_pass.errors?.['pattern']">Password is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" (click)="onSignin()" [disabled]="userSigninform.invalid" class="btn btn-primary btn-block">Signin</button>
+                        </div>
+                    </form>
+                    <!-- end form -->
+
+                    <div class="text-center">
+                        <a style="text-decoration: none;" [routerLink]="['/customerschangepassword/resetpassword']">Forget Password?</a>
+                    </div>
+
+                </div>
+                <!-- end div -->
+
+                <!-- start div register form content -->
+                <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab">
+
+                    <h3 class="text-center text-primary">Register</h3>
+
+                    <!-- start form -->
+                    <form [formGroup]="userSignupform">
+                        <div class="form-group">
+                            <input type="text" formControlName="user_name" [class.is-invalid]="user_name.touched && user_name.invalid" class="form-control" placeholder="Name">
+                            <section *ngIf="user_name.touched && user_name.invalid">
+                                <small class="text-danger" *ngIf="user_name.errors?.['required']">Name is required</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" formControlName="user_email" [class.is-invalid]="user_email.touched && user_email.invalid" class="form-control" placeholder="Email">
+                            <section *ngIf="user_email.touched && user_email.invalid">
+                                <small class="text-danger" *ngIf="user_email.errors?.['required']">Email is required</small>
+                                <small class="text-danger" *ngIf="user_email.errors?.['pattern']">Email is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" formControlName="user_phone" [class.is-invalid]="user_phone.touched && user_phone.invalid" class="form-control" placeholder="Phone">
+                            <section *ngIf="user_phone.touched && user_phone.invalid">
+                                <small class="text-danger" *ngIf="user_phone.errors?.['required']">Phone is required</small>
+                                <small class="text-danger" *ngIf="user_phone.errors?.['pattern']">Phone is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="{{ showhidePassword ? 'password' : 'text' }}" formControlName="user_pass" 
+                            [class.is-invalid]="user_pass.touched && user_pass.invalid || userSignupform.errors?.['userMisMatchPass']" class="form-control" placeholder="Password">
+                            <span  class="eye-icon">
+                                <fa-icon [icon]="showhidePassword ? eyeSlash : eye" (click)="togglePasswordVisibility()"></fa-icon>
+                            </span>
+                            <section *ngIf="user_pass.touched && user_pass.invalid || userSignupform.errors?.['userMisMatchPass']">
+                                <small class="text-danger" *ngIf="user_pass.errors?.['required']">Password is required</small>
+                                <small class="text-danger" *ngIf="user_pass.errors?.['pattern']">Password is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="{{ showhidePassword ? 'password' : 'text' }}" formControlName="user_confirmpass" 
+                            [class.is-invalid]="user_confirmpass.touched && user_confirmpass.invalid || 
+                            userSignupform.errors?.['userMisMatchPass']" class="form-control" placeholder="Confirmpassword">
+                            <span  class="eye-icon">
+                                <fa-icon [icon]="showhidePassword ? eyeSlash : eye" (click)="togglePasswordVisibility()"></fa-icon>
+                            </span>
+                            <section *ngIf="user_confirmpass.touched && user_confirmpass.invalid || 
+                            userSignupform.errors?.['userMisMatchPass']">
+                                <small class="text-danger" *ngIf="user_confirmpass.errors?.['required']">Confirmpassword is required</small>
+                                <small class="text-danger" *ngIf="user_confirmpass.errors?.['pattern']">Confirmpassword is invalid</small>
+                            </section>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" (click)="onSignup()" [disabled]="userSignupform.invalid" 
+                            class="btn btn-primary btn-block">Signup</button>
+                        </div>
+
+                    </form>
+                    <!-- end form -->
+
+                </div>
+                <!-- end div -->
+
+            </div>
+            <!-- end div -->
+
+        </div>
+        <!-- end div -->
+
+    </div>
+    <!-- end div card -->
+
+</div>
+<!-- end div -->

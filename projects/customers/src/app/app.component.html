@@ -1,0 +1,157 @@
+<!-- start ngx-spinner -->
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-clip-rotate">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<!-- start nav  -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+
+    <!-- start div container-fluid -->
+    <div class="container-fluid">
+
+        <!-- start div flex-items-start -->
+        <div class="d-flex align-items-start px-2">
+
+            <a class="side-nav-button p-2 me-3 text-light" (click)="sideNavToggle()">
+                <fa-icon [icon]="sideBar"></fa-icon>
+            </a>
+
+            <div class="navbar-brand">
+                <strong class="ml-3">FoodJunction</strong>
+            </div>
+
+        </div>
+        <!-- end div -->
+
+        <!-- start div right elements flex -->
+        <div *ngIf="!userActive" class="d-flex justify-content-end">
+            <button type="button" (click)="onCustomerSignup()" class="btn btn-success">Login</button>
+        </div>
+
+        <div *ngIf="userActive" class="d-flex justify-content-end">
+            <span class="nav-text text-white">{{userActive}}</span>
+            <a  class="nav-cart-button p-2 me-3 text-light" (click)="onCart()"><fa-icon [icon]="shopCart"></fa-icon></a>
+            <button type="button" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#exampleModalLogout">Logout</button>
+        </div>
+
+    </div>
+    <!-- end div -->
+
+    <!-- start div sidenav-content -->
+    <div class="side-nav-content bg-dark" [ngClass]="toggleMenu == false ? 'hide':'show'">
+
+        <!-- start ul -->
+        <ul class="nav-list ">
+            <li class="nav-list-item"  [routerLink]="['/customershome/home']">
+                <fa-icon [icon]="home"></fa-icon>
+                <span>
+                    <a>Home</a>
+                </span>
+            </li>
+
+            <li class="nav-list-item" [routerLink]="['/customersfooditems/fooditems']">
+                <fa-icon [icon]="foods"></fa-icon>
+                <span>
+                    <a>FoodsItems</a>
+                </span>
+            </li>
+
+            <li class="nav-list-item" [routerLink]="['/customersorders/orders']">
+                <fa-icon [icon]="orders"></fa-icon>
+                <span>
+                    <a>MyOrders</a>
+                </span>
+            </li>
+
+            <li class="nav-list-item" [routerLink]="['/customersaboutus/aboutus']">
+                <fa-icon [icon]="question"></fa-icon>
+                <span>
+                    <a>Aboutus</a>
+                </span>
+            </li>
+
+            <li class="nav-list-item" [routerLink]="['/customerscontacts/contacts']">
+                <fa-icon [icon]="contact"></fa-icon>
+                <span>
+                    <a>Contacts</a>
+                </span>
+            </li>
+        </ul>
+        <!-- end ul -->
+
+    </div>
+    <!-- end div -->
+
+</nav>
+<!-- end nav -->
+
+<!-- start div modal -->
+<div class="modal fade" id="exampleModalLogout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Do you want to logout?</strong></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="onSignout()" data-dismiss="modal">Signout</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end div -->
+
+<!-- break -->
+<br/><br/>
+
+<!-- start main -->
+<main>
+    <!-- start section -->
+    <section>
+        <router-outlet></router-outlet>
+    </section>
+    <!-- end section -->
+</main>
+<!-- end main -->
+
+<!-- start footer -->
+<footer class="w-100 py-4 bg-dark flex-shrink-0 ">
+    <div class="container py-4">
+        <div class="row gy-4 gx-5">
+            <div class="col-lg-4 col-md-6">
+                <h5 class="h1 text-white">FJ.</h5>
+                <p class="small text-muted">This website are orders some food and drinks on the restaurant.</p>
+                <p class="small text-muted mb-0">&copy; Copyrights.FoodJunction. <a class="text-primary" href="#">foodjunction.com</a></p>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-white mb-3">Quick links</h5>
+                <ul class="list-unstyled text-muted">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Get started</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-white mb-3">Quick links</h5>
+                <ul class="list-unstyled text-muted">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Get started</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h5 class="text-white mb-3">Newsletter</h5>
+                <p class="small text-muted">We are trying from take a provides good service to the customers.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end footer -->
